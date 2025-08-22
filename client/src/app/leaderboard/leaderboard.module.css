@@ -1,0 +1,39 @@
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: 2rem auto;
+}
+.loading, .error {
+  color: var(--text-muted);
+  font-size: 1.2rem;
+}
+.podium {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  height: 12rem;
+}
+.podiumCard {
+  width: 30%;
+  padding: 1rem;
+  border-radius: 0.5rem 0.5rem 0 0;
+  text-align: center;
+  color: #111827;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  border-bottom: 4px solid;
+}
+.gold { background-color: var(--accent-gold); border-color: #fbbF24; transform: scale(1.1); z-index: 10; }
+.silver { background-color: var(--accent-silver); border-color: #e5e7eb; }
+.bronze { background-color: var(--accent-bronze); border-color: #f97316; }
+.medal { font-size: 2.5rem; }
+.podiumName { font-weight: 700; font-size: 1.25rem; }
+.podiumScore { font-weight: 600; font-size: 1rem; }
+
+.table { width: 100%; border-collapse: collapse; }
+.table tr { border-bottom: 1px solid var(--border-color); }
+.table td { padding: 1rem; }
+.rank { text-align: center; font-weight: 700; color: var(--text-muted); }
+.name { font-weight: 500; }
+.score { text-align: right; font-family: monospace; color: var(--secondary-color); }

@@ -1,0 +1,606 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.header h1 {
+  color: var(--text-color);
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.header p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0;
+}
+
+.tab {
+  background: transparent;
+  color: var(--text-muted);
+  border: none;
+  padding: 1rem 1.5rem;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 500;
+  border-bottom: 3px solid transparent;
+  border-radius: 8px 8px 0 0;
+}
+
+.tab:hover {
+  color: var(--text-color);
+  background: rgba(0, 123, 255, 0.1);
+}
+
+.activeTab {
+  color: var(--primary-color);
+  border-bottom-color: var(--primary-color);
+  background: rgba(0, 123, 255, 0.1);
+}
+
+.tabContent {
+  min-height: 400px;
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.refreshButton, .copyAllButton {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 600;
+}
+
+.refreshButton {
+  background: var(--primary-color);
+  color: white;
+}
+
+.refreshButton:hover:not(:disabled) {
+  background: #0056b3;
+}
+
+.refreshButton:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.copyAllButton {
+  background: #28a745;
+  color: white;
+}
+
+.copyAllButton:hover {
+  background: #218838;
+}
+
+/* Error */
+.error {
+  background: rgba(220, 53, 69, 0.1);
+  border: 1px solid rgba(220, 53, 69, 0.3);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.error p {
+  color: #dc3545;
+  margin: 0 0 1rem 0;
+}
+
+.retryButton {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.retryButton:hover {
+  background: #c82333;
+}
+
+/* Groups */
+.groupsContainer {
+  margin-bottom: 3rem;
+}
+
+.groupsContainer h2 {
+  color: var(--text-color);
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+}
+
+.groupsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.groupCard {
+  background: rgba(248, 249, 250, 0.1);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.groupCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.groupCard h3 {
+  color: var(--primary-color);
+  margin: 0 0 1rem 0;
+  font-size: 1.3rem;
+}
+
+.codeSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.code {
+  background: var(--card-bg);
+  color: var(--text-color);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-family: 'Courier New', monospace;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: 1px solid var(--border-color);
+  min-width: 120px;
+}
+
+.copyButton {
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 14px;
+}
+
+.copyButton:hover {
+  background: #5a6268;
+}
+
+.groupInfo {
+  color: var(--text-muted);
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Global Leaderboard */
+.leaderboardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.globalStats h2, .topPerformers h2, .groupsOverview h2 {
+  color: var(--text-color);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.statCard {
+  background: rgba(248, 249, 250, 0.1);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.statCard h3 {
+  color: var(--text-muted);
+  margin: 0 0 0.5rem 0;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.statCard p {
+  color: var(--text-color);
+  margin: 0;
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.performersList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.performerItem {
+  background: var(--card-bg);
+  padding: 1rem;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--border-color);
+}
+
+.performerItem .rank {
+  background: var(--primary-color);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: bold;
+  min-width: 40px;
+  text-align: center;
+}
+
+.performerItem .name {
+  flex: 1;
+  margin: 0 1rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.performerItem .score {
+  color: #28a745;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.groupsTable {
+  overflow-x: auto;
+}
+
+.groupsTable table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card-bg);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.groupsTable th,
+.groupsTable td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.groupsTable th {
+  background: rgba(0, 123, 255, 0.1);
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+.groupsTable td {
+  color: var(--text-color);
+}
+
+.groupsTable code {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+}
+
+.status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.status.active {
+  background: rgba(40, 167, 69, 0.2);
+  color: #28a745;
+}
+
+.status.inactive {
+  background: rgba(108, 117, 125, 0.2);
+  color: #6c757d;
+}
+
+/* Tournament Management */
+.managementContent h2 {
+  color: var(--text-color);
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+}
+
+.managementActions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.actionCard {
+  background: rgba(248, 249, 250, 0.1);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.actionCard h3 {
+  color: var(--primary-color);
+  margin: 0 0 0.75rem 0;
+  font-size: 1.2rem;
+}
+
+.actionCard p {
+  color: var(--text-muted);
+  margin: 0 0 1rem 0;
+  line-height: 1.5;
+}
+
+.dangerButton {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-weight: 500;
+}
+
+.dangerButton:hover {
+  background: #c82333;
+}
+
+.exportButton {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-weight: 500;
+}
+
+.exportButton:hover:not(:disabled) {
+  background: #218838;
+}
+
+.exportButton:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* Instructions */
+.instructions {
+  background: rgba(13, 110, 253, 0.05);
+  border: 1px solid rgba(13, 110, 253, 0.2);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.instructions h3 {
+  color: var(--primary-color);
+  margin: 0 0 1rem 0;
+  font-size: 1.2rem;
+}
+
+.instructions ol {
+  color: var(--text-color);
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.instructions li {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+/* Quick Access */
+.quickAccess {
+  text-align: center;
+}
+
+.quickAccess h3 {
+  color: var(--text-color);
+  margin: 0 0 1rem 0;
+  font-size: 1.2rem;
+}
+
+.links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.link {
+  display: inline-block;
+  padding: 10px 20px;
+  background: var(--primary-color);
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color 0.3s;
+  font-weight: 500;
+}
+
+.link:hover {
+  background: #0056b3;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+    margin: 0 0.5rem;
+  }
+  
+  .header h1 {
+    font-size: 2rem;
+  }
+  
+  .header p {
+    font-size: 1rem;
+  }
+  
+  .tabs {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  .tab {
+    border-radius: 8px;
+    border-bottom: none;
+    border-left: 3px solid transparent;
+  }
+  
+  .activeTab {
+    border-left-color: var(--primary-color);
+    border-bottom-color: transparent;
+  }
+  
+  .controls {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .refreshButton, .copyAllButton {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .groupsGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .groupCard {
+    padding: 1rem;
+  }
+  
+  .codeSection {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .code {
+    font-size: 1.1rem;
+    min-width: auto;
+  }
+  
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .managementActions {
+    grid-template-columns: 1fr;
+  }
+  
+  .links {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .link {
+    width: 100%;
+    max-width: 250px;
+    text-align: center;
+  }
+  
+  .groupsTable {
+    font-size: 0.9rem;
+  }
+  
+  .groupsTable th,
+  .groupsTable td {
+    padding: 0.75rem 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0.75rem;
+    margin: 0 0.25rem;
+  }
+  
+  .header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .groupsContainer h2 {
+    font-size: 1.5rem;
+  }
+  
+  .instructions, .quickAccess {
+    padding: 1rem;
+  }
+  
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .statCard p {
+    font-size: 1.5rem;
+  }
+  
+  .performerItem {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+  
+  .performerItem .name {
+    margin: 0;
+  }
+}

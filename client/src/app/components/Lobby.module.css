@@ -1,0 +1,254 @@
+.card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.card h1 {
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.groupInfo {
+  background: rgba(248, 249, 250, 0.1);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  text-align: center;
+  border: 1px solid var(--border-color);
+}
+
+.groupInfo h2 {
+  color: var(--primary-color);
+  margin: 0 0 0.5rem 0;
+}
+
+.groupInfo p {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--text-color);
+}
+
+.playerSection {
+  margin-bottom: 2rem;
+}
+
+.playerSection h3 {
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.playerList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.player {
+  background: rgba(248, 249, 250, 0.1);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--border-color);
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.playerName {
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.proctor {
+  color: #f59e0b;
+  font-weight: bold;
+  margin-left: 0.5rem;
+}
+
+.playerScore {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.waiting {
+  text-align: center;
+  color: var(--text-muted);
+  font-style: italic;
+  margin: 1rem 0;
+}
+
+.proctorControls {
+  text-align: center;
+  padding: 1rem;
+  background: rgba(40, 167, 69, 0.1);
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(40, 167, 69, 0.3);
+}
+
+.button {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 0 0.5rem;
+}
+
+.button:hover {
+  background: #0056b3;
+}
+
+.hint {
+  color: var(--text-muted);
+  font-size: 14px;
+  margin-top: 0.5rem;
+}
+
+.playerWaiting {
+  text-align: center;
+  padding: 1rem;
+  background: rgba(255, 193, 7, 0.1);
+  border-radius: 8px;
+  color: #856404;
+  border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+/* Proctor Leaderboard Styles */
+.proctorLeaderboard {
+  background: rgba(13, 110, 253, 0.05);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+  border: 1px solid rgba(13, 110, 253, 0.2);
+}
+
+.proctorLeaderboard h3 {
+  color: var(--primary-color);
+  margin: 0 0 1rem 0;
+  text-align: center;
+}
+
+.leaderboardGrid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.leaderboardItem {
+  background: var(--card-bg);
+  padding: 0.75rem;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--border-color);
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.rank {
+  background: var(--primary-color);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+  min-width: 30px;
+  text-align: center;
+}
+
+.name {
+  flex: 1;
+  margin: 0 1rem;
+  font-weight: 500;
+  color: var(--text-color);
+  min-width: 100px;
+}
+
+.score {
+  color: #28a745;
+  font-weight: bold;
+  font-size: 1.1rem;
+  white-space: nowrap;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .card {
+    padding: 1rem;
+    margin: 0 0.5rem;
+  }
+  
+  .groupInfo {
+    padding: 0.75rem;
+  }
+  
+  .groupInfo h2 {
+    font-size: 1.2rem;
+  }
+  
+  .player {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  .playerName, .playerScore {
+    text-align: center;
+  }
+  
+  .proctorControls {
+    padding: 0.75rem;
+  }
+  
+  .button {
+    display: block;
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+  
+  .proctorLeaderboard {
+    padding: 1rem;
+  }
+  
+  .leaderboardItem {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  .name {
+    margin: 0;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 0.5rem;
+    margin: 0 0.25rem;
+  }
+  
+  .card h1 {
+    font-size: 1.5rem;
+  }
+  
+  .groupInfo h2 {
+    font-size: 1.1rem;
+  }
+  
+  .proctorLeaderboard h3 {
+    font-size: 1.1rem;
+  }
+}

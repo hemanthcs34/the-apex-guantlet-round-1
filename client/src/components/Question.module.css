@@ -1,0 +1,69 @@
+.card {
+  width: 100%;
+  max-width: 800px;
+  background-color: #1f2937;
+  border: 1px solid #4b5563;
+  border-radius: 0.75rem;
+  padding: 2rem;
+  margin: auto;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.category {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #8b5cf6;
+}
+.questionText {
+  font-size: 1.5rem;
+  line-height: 1.6;
+  min-height: 120px;
+  margin: 2rem 0;
+}
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: #374151;
+  border: 1px solid #4b5563;
+  border-radius: 0.5rem;
+  color: #e5e7eb;
+  font-size: 1rem;
+}
+.button {
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  color: white;
+  background-color: #7c3aed;
+  cursor: pointer;
+}
+.button:disabled {
+    background-color: #585068;
+    cursor: not-allowed;
+}
+.resultBox {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  font-weight: 600;
+}
+.correct {
+  background-color: #166534;
+  color: #dcfce7;
+}
+.incorrect {
+  background-color: #991b1b;
+  color: #fee2e2;
+}
