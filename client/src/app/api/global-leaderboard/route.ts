@@ -10,26 +10,40 @@ export async function GET() {
     await connectDB();
     
     // Get all participants with their scores, sorted by total score
+   
+    console.log("participants are ",Participant);
     const allParticipants = await Participant.find({})
       .sort({ totalScore: -1 })
       .select('name totalScore isProctor groupId createdAt');
-
+console.log("participants: ",allParticipants);
     // Get all groups for reference
-    const allGroups = await Group.find({}).select('name code questionSetIndex roundStarted');
-
+    const allGroups = await Group.find({}).select('name code questionSetIndex roundStarted participants ');
+console.log("groups are:",allGroups);
     // Separate proctors and regular participants
     const proctors = allParticipants.filter(p => p.isProctor);
     const regularParticipants = allParticipants.filter(p => !p.isProctor);
 
     // Group participants by their group
-    const participantsByGroup = {};
+    const participantsByGroup: { [key: string]: {
+      groupName: string;
+      groupCode: string;
+      questionSetIndex: number;
+      roundStarted: boolean;
+      participants: Array<{
+      name: string;
+      totalScore: number;
+      participantId: any;
+      createdAt: Date;
+      }>;
+    }} = {};
+
     allGroups.forEach(group => {
       participantsByGroup[group._id.toString()] = {
-        groupName: group.name,
-        groupCode: group.code,
-        questionSetIndex: group.questionSetIndex,
-        roundStarted: group.roundStarted,
-        participants: []
+      groupName: group.name,
+      groupCode: group.code,
+      questionSetIndex: group.questionSetIndex,
+      roundStarted: group.roundStarted,
+      participants: []
       };
     });
 
@@ -45,6 +59,8 @@ export async function GET() {
         });
       }
     });
+    console.log("regular participants are:", regularParticipants);
+    console.log("participants by group:", participantsByGroup);
 
     // Calculate global statistics
     const totalParticipants = regularParticipants.length;

@@ -16,7 +16,9 @@ export default function AdminPage() {
     try {
       const response = await fetch('/api/groups');
       if (response.ok) {
+
         const data = await response.json();
+        console.log("data groups:",data);
         setGroups(data.groupCodes || []);
       } else {
         throw new Error('Failed to fetch groups');
@@ -33,6 +35,7 @@ export default function AdminPage() {
       const response = await fetch('/api/global-leaderboard');
       if (response.ok) {
         const data = await response.json();
+        console.log("data leaderboard:",data);
         setGlobalLeaderboard(data);
       }
     } catch (err) {
@@ -151,7 +154,7 @@ export default function AdminPage() {
               <h2>📊 Tournament Groups ({groups.length})</h2>
               <div className={styles.groupsGrid}>
                 {groups.map((group, index) => (
-                  <div key={index} className={styles.groupCard}>
+                  <div key={group.code || index} className={styles.groupCard}>
                     <h3>{group.groupName}</h3>
                     <div className={styles.codeSection}>
                       <span className={styles.code}>{group.code}</span>
@@ -210,7 +213,7 @@ export default function AdminPage() {
                 <h2>🏆 Top Performers (All Groups)</h2>
                 <div className={styles.performersList}>
                   {globalLeaderboard.topPerformers.map((participant) => (
-                    <div key={participant.participantId} className={styles.performerItem}>
+                    <div key={participant.participantId || participant.name} className={styles.performerItem}>
                       <span className={styles.rank}>#{participant.rank}</span>
                       <span className={styles.name}>{participant.name}</span>
                       <span className={styles.score}>{participant.totalScore} pts</span>
@@ -231,6 +234,7 @@ export default function AdminPage() {
                         <th>Total Score</th>
                         <th>Avg Score</th>
                         <th>Status</th>
+                        <th>Top 5 Participants</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -245,6 +249,19 @@ export default function AdminPage() {
                             <span className={`${styles.status} ${group.roundStarted ? styles.active : styles.inactive}`}>
                               {group.roundStarted ? 'Active' : 'Waiting'}
                             </span>
+                          </td>
+                          <td>
+                            {Array.isArray(group.participants) && group.participants.length > 0 ? (
+                              <ul style={{margin:0,paddingLeft:'1em'}}>
+                                {group.participants.slice(0, 5).map((p, idx) => (
+                                  <li key={p.participantId || p.name || idx}>
+                                    {p.name} ({p.totalScore} pts)
+                                  </li>
+                                ))}
+                              </ul>
+                            ) : (
+                              <span style={{color:'#888'}}>No participants</span>
+                            )}
                           </td>
                         </tr>
                       ))}
