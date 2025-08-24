@@ -5,25 +5,40 @@ import styles from './Question.module.css';
 export default function Question({ userInfo, socket, currentGroup }) {
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [answer, setAnswer] = useState('');
-  // Restore answer from localStorage on mount (for non-proctor)
-  useEffect(() => {
-    if (!isProctor && currentQuestion) {
-      const savedAnswer = localStorage.getItem(`answer_${userInfo?.participantId}_${currentQuestion.index}`);
-      if (savedAnswer) setAnswer(savedAnswer);
-    }
-  }, [isProctor, currentQuestion, userInfo?.participantId]);
   const [timeLeft, setTimeLeft] = useState(0);
   const [isAnswered, setIsAnswered] = useState(false);
   const [gameCompleted, setGameCompleted] = useState(false);
   const [finalResults, setFinalResults] = useState(null);
   const [showSolutions, setShowSolutions] = useState(false);
-  const isProctor = !!userInfo?.isProctor;
   const [isViewingPhase, setIsViewingPhase] = useState(false);
+
+  const isProctor = !!userInfo?.isProctor;
+
+  // 🔹 Restore saved answer from sessionStorage when question changes
+  useEffect(() => {
+    if (!isProctor && currentQuestion) {
+      const savedAnswer = sessionStorage.getItem(
+        `answer_q${currentQuestion.index}_${userInfo?.participantId}`
+      );
+      if (savedAnswer) {
+        setAnswer(savedAnswer);
+      }
+    }
+  }, [currentQuestion, isProctor, userInfo?.participantId]);
+
+  // 🔹 Save answer to sessionStorage whenever it changes
+  useEffect(() => {
+    if (!isProctor && currentQuestion) {
+      sessionStorage.setItem(
+        `answer_q${currentQuestion.index}_${userInfo?.participantId}`,
+        answer
+      );
+    }
+  }, [answer, currentQuestion, isProctor, userInfo?.participantId]);
 
   useEffect(() => {
     if (socket) {
       socket.on('newQuestion', (payload) => {
-        // payload can be number (legacy) or { index, question }
         if (typeof payload === 'number') {
           const questions = getQuestions();
           const idx = payload;
@@ -58,11 +73,14 @@ export default function Question({ userInfo, socket, currentGroup }) {
 
       socket.on('answerResult', (result) => {
         setIsAnswered(true);
-        // Show result feedback
         if (result.correct) {
           alert(`Correct! +${result.pointsAwarded} points`);
         } else {
           alert('Incorrect answer');
+        }
+        // 🔹 Clear saved answer after submission
+        if (currentQuestion) {
+          sessionStorage.removeItem(`answer_q${currentQuestion.index}_${userInfo?.participantId}`);
         }
       });
 
@@ -79,9 +97,8 @@ export default function Question({ userInfo, socket, currentGroup }) {
         socket.off('gameOver');
       }
     };
-  }, [socket]);
+  }, [socket, currentQuestion, userInfo?.participantId]);
 
-  // Ensure we request the current question whenever the component mounts or socket/group changes
   useEffect(() => {
     if (!socket || !currentGroup || !userInfo?.groupId) return;
     socket.emit('getCurrentQuestion', { groupId: userInfo.groupId });
@@ -92,13 +109,10 @@ export default function Question({ userInfo, socket, currentGroup }) {
       const timer = setInterval(() => {
         setTimeLeft(prev => {
           if (prev <= 1) {
-            // Phase end
             if (currentQuestion.category === 'Sequence Recall' && isViewingPhase) {
-              // transition to solving phase: 5 minutes
               setIsViewingPhase(false);
-              return 300; // start solving timer
+              return 300;
             }
-            // Time's up - auto-submit empty answer for participants only in solving phase
             if (!isProctor && !isViewingPhase) {
               handleSubmit('');
             }
@@ -113,7 +127,6 @@ export default function Question({ userInfo, socket, currentGroup }) {
   }, [timeLeft, currentQuestion, gameCompleted, isProctor, isViewingPhase]);
 
   const getQuestions = () => {
-    // This should match your questions structure
     return [
       [
         { "category": "Tech Riddle", "question": "I follow you all day but disappear at night. I mimic your every move, yet you never see me. What am I?", "answer": "Shadow", "time_limit": 180 },
@@ -127,14 +140,11 @@ export default function Question({ userInfo, socket, currentGroup }) {
   };
 
   const handleSubmit = (submittedAnswer = null) => {
-    if (isProctor) return; // proctor cannot answer
+    if (isProctor) return;
     if (isAnswered || !currentQuestion || !socket) return;
 
     const finalAnswer = submittedAnswer !== null ? submittedAnswer : answer;
     const timeTaken = currentQuestion.time_limit - timeLeft;
-
-    // Save answer to localStorage for persistence
-    localStorage.setItem(`answer_${userInfo?.participantId}_${currentQuestion.index}`, finalAnswer);
 
     socket.emit('submitAnswer', {
       groupId: userInfo.groupId,
@@ -145,6 +155,9 @@ export default function Question({ userInfo, socket, currentGroup }) {
     });
 
     setIsAnswered(true);
+
+    // 🔹 Clear answer from sessionStorage after submission
+    sessionStorage.removeItem(`answer_q${currentQuestion.index}_${userInfo?.participantId}`);
   };
 
   const fetchFinalResults = async () => {
@@ -162,7 +175,7 @@ export default function Question({ userInfo, socket, currentGroup }) {
   const getAnswerHint = (category) => {
     switch (category) {
       case 'Sudoku':
-        return "Enter your answer as comma-separated values. Example: 1,2,3,4 (representing the completed grid row by row)";
+        return "Enter your answer as comma-separated values. Example: 1,2,3,4 (row by row)";
       case 'Sequence Recall':
         return "Enter only the final answer, not the sequence itself";
       case 'Maths Problem':
@@ -291,7 +304,6 @@ export default function Question({ userInfo, socket, currentGroup }) {
       <div className={styles.question}>
         <h3>Question {currentQuestion.index + 1} of 6</h3>
         {currentQuestion.category === 'Sequence Recall' ? (
-          // In Sequence Recall: show during viewing phase to everyone; during solving phase hide text for participants
           (isViewingPhase || isProctor) ? (
             <>
               <p>{currentQuestion.question}</p>
@@ -304,7 +316,6 @@ export default function Question({ userInfo, socket, currentGroup }) {
           <p>{currentQuestion.question}</p>
         )}
         
-        {/* Answer format hint */}
         <div className={styles.answerHint}>
           <p className={styles.hintText}>
             💡 <strong>Answer Format:</strong> {getAnswerHint(currentQuestion.category)}
@@ -318,12 +329,7 @@ export default function Question({ userInfo, socket, currentGroup }) {
             type="text"
             placeholder="Enter your answer..."
             value={answer}
-            onChange={(e) => {
-              setAnswer(e.target.value);
-              if (!isProctor && currentQuestion) {
-                localStorage.setItem(`answer_${userInfo?.participantId}_${currentQuestion.index}`, e.target.value);
-              }
-            }}
+            onChange={(e) => setAnswer(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
             disabled={isAnswered || (currentQuestion?.category === 'Sequence Recall' && isViewingPhase)}
             className={styles.answerInput}

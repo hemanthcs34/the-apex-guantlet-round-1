@@ -5,7 +5,7 @@ import Login from '../components/Login';
 import Lobby from '../components/Lobby';
 import Question from '../components/Question';
 
-const SOCKET_URL = "http://localhost:3001";
+const SOCKET_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 
 export default function HomePage() {
   const [socket, setSocket] = useState(null);

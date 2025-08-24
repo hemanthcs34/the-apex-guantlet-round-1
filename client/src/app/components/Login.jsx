@@ -8,23 +8,12 @@ export default function Login({ onLogin }) {
   const [playerName, setPlayerName] = useState('');
 
   useEffect(() => {
-    // Restore player name
+    // Get the player name from localStorage (set on landing page)
     const storedName = localStorage.getItem('playerName');
     if (storedName) {
       setPlayerName(storedName);
     }
-
-    // 🟢 Check if already logged in (persist session)
-    const storedSession = localStorage.getItem('sessionData');
-    if (storedSession) {
-      try {
-        const parsed = JSON.parse(storedSession);
-        onLogin(parsed); // auto-login on refresh
-      } catch (e) {
-        console.error("Invalid session data", e);
-      }
-    }
-  }, [onLogin]);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,7 +25,9 @@ export default function Login({ onLogin }) {
     try {
       const response = await fetch('/api/groups', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({
           name: playerName.trim(),
           code: code.trim().toUpperCase()
@@ -44,15 +35,12 @@ export default function Login({ onLogin }) {
       });
 
       const data = await response.json();
-
+      
       if (!response.ok) {
         throw new Error(data.message || 'Failed to join group');
       }
 
-      // 🟢 Save session in localStorage
-      localStorage.setItem('sessionData', JSON.stringify(data));
-
-      onLogin(data);  
+      onLogin(data);
     } catch (err) {
       setError(err.message);
     } finally {

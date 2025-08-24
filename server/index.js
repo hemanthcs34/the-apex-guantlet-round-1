@@ -11,11 +11,21 @@ import Participant from './models/Participants.js';
 import Answer from './models/Answer.js';
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+  
+  ],
+  credentials: true
+}));
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "*", // Change to your Next.js app's URL in production
+    origin: [
+      'http://localhost:3000',
+    ],
+    methods: ['GET', 'POST'],
+    credentials: true
   }
 });
 
