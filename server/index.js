@@ -14,7 +14,7 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:3000',
-    'https://your-frontend-domain.com', // add your deployed frontend domain here
+    'https://client-theta-two-51.vercel.app',
     'https://the-apex-guantlet-round-1.onrender.com' // if needed
   ],
   credentials: true
@@ -24,7 +24,7 @@ const io = new Server(server, {
   cors: {
     origin: [
       'http://localhost:3000',
-      'https://client-theta-two-51.vercel.app',
+   'https://client-theta-two-51.vercel.app',
       'https://the-apex-guantlet-round-1.onrender.com' // if needed
     ],
     methods: ['GET', 'POST'],

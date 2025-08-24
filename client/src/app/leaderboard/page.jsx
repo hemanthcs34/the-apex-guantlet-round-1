@@ -3,8 +3,28 @@ import useSWR from "swr";
 import { motion } from "framer-motion";
 import styles from './leaderboard.module.css';
 import GameLayout from "@/components/GameLayout";
+import { data } from "framer-motion/client";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
+console.log(fetcher);
+export default function Leaderboard() {
+  const { data: players, error, isLoading } = useSWR(
+    "/api/leaderboard",
+    fetcher,
+    { refreshInterval: 5000 }
+  );
+  console.log("Leaderboard API response:", players);
+  console.log("Leaderboard error:", error);
+  console.log("Leaderboard loading:", isLoading);
+
+  if (isLoading) return <div className={styles.loading}>Loading Leaderboard...</div>;
+  if (error) return <div className={styles.error}>Failed to load leaderboard.</div>;
+  if (!players || players.length === 0) {
+    return <div className={styles.loading}>No players yet.</div>;
+  }
+
+  const topThree = players.slice(0, 3);
+  const rest = players.slice(3)
 
 const PodiumCard = ({ player, rank, style }) => {
   const medal = ["🥇", "🥈", "🥉"][rank - 1];
@@ -20,22 +40,6 @@ const PodiumCard = ({ player, rank, style }) => {
     </motion.div>
   );
 };
-
-export default function Leaderboard() {
-  const { data: players, error, isLoading } = useSWR(
-    "/api/leaderboard",
-    fetcher,
-    { refreshInterval: 5000 }
-  );
-
-  if (isLoading) return <div className={styles.loading}>Loading Leaderboard...</div>;
-  if (error) return <div className={styles.error}>Failed to load leaderboard.</div>;
-  if (!players || players.length === 0) {
-    return <div className={styles.loading}>No players yet.</div>;
-  }
-
-  const topThree = players.slice(0, 3);
-  const rest = players.slice(3);
 
   return (
     <GameLayout>
