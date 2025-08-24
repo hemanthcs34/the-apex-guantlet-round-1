@@ -25,7 +25,6 @@ export default function HomePage() {
 
     newSocket.on('roundStarted', () => {
       setGameState('question');
-      // Request current question on round start for all clients
       if (currentGroup) {
         newSocket.emit('getCurrentQuestion', { groupId: currentGroup.id });
       }
@@ -34,6 +33,7 @@ export default function HomePage() {
     newSocket.on('newQuestion', (payload) => {
       const idx = typeof payload === 'number' ? payload : payload?.index;
       setCurrentQuestionIndex(idx ?? null);
+      setGameState('question'); // Ensure we show the question view
     });
 
     newSocket.on('gameOver', () => {
@@ -43,6 +43,8 @@ export default function HomePage() {
     newSocket.on('error', (message) => {
       alert(message);
     });
+
+  // Removed localStorage session restore logic
 
     return () => newSocket.close();
   }, []);
@@ -56,15 +58,16 @@ export default function HomePage() {
       groupId: loginData.group.id
     });
     setCurrentGroup(loginData.group);
-    
+
+
     // Join the Socket.IO room
     if (socket) {
       socket.emit('joinGroup', loginData.group.id);
     }
-    
+
     // Move to lobby
     setGameState('lobby');
-    
+
     // Fetch current participants for this group
     fetchParticipants(loginData.group.id);
   };

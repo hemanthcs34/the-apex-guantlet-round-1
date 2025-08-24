@@ -135,7 +135,8 @@ io.on('connection', (socket) => {
     const submitter = await Participant.findById(participantId);
     if (submitter?.isProctor) return;
 
-    const existingAnswer = await Answer.findOne({ participantId, questionIndex, groupId });
+    // Session control: Only allow one answer per session per question
+    const existingAnswer = await Answer.findOne({ participantId, questionIndex, groupId, sessionId: submitter.sessionId });
     if (existingAnswer) return;
 
     const questionSet = questions[group.questionSetIndex];
@@ -151,8 +152,8 @@ io.on('connection', (socket) => {
       points = pointValues[rank] || 0;
     }
 
-    await new Answer({ groupId, participantId, questionIndex, pointsAwarded: points, timeTaken }).save();
-    
+    await new Answer({ groupId, participantId, questionIndex, pointsAwarded: points, timeTaken, sessionId: submitter.sessionId }).save();
+
     const participant = await Participant.findById(participantId);
     if (participant) {
       participant.totalScore += points;

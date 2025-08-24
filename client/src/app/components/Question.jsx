@@ -5,6 +5,13 @@ import styles from './Question.module.css';
 export default function Question({ userInfo, socket, currentGroup }) {
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [answer, setAnswer] = useState('');
+  // Restore answer from localStorage on mount (for non-proctor)
+  useEffect(() => {
+    if (!isProctor && currentQuestion) {
+      const savedAnswer = localStorage.getItem(`answer_${userInfo?.participantId}_${currentQuestion.index}`);
+      if (savedAnswer) setAnswer(savedAnswer);
+    }
+  }, [isProctor, currentQuestion, userInfo?.participantId]);
   const [timeLeft, setTimeLeft] = useState(0);
   const [isAnswered, setIsAnswered] = useState(false);
   const [gameCompleted, setGameCompleted] = useState(false);
@@ -125,6 +132,9 @@ export default function Question({ userInfo, socket, currentGroup }) {
 
     const finalAnswer = submittedAnswer !== null ? submittedAnswer : answer;
     const timeTaken = currentQuestion.time_limit - timeLeft;
+
+    // Save answer to localStorage for persistence
+    localStorage.setItem(`answer_${userInfo?.participantId}_${currentQuestion.index}`, finalAnswer);
 
     socket.emit('submitAnswer', {
       groupId: userInfo.groupId,
@@ -308,7 +318,12 @@ export default function Question({ userInfo, socket, currentGroup }) {
             type="text"
             placeholder="Enter your answer..."
             value={answer}
-            onChange={(e) => setAnswer(e.target.value)}
+            onChange={(e) => {
+              setAnswer(e.target.value);
+              if (!isProctor && currentQuestion) {
+                localStorage.setItem(`answer_${userInfo?.participantId}_${currentQuestion.index}`, e.target.value);
+              }
+            }}
             onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
             disabled={isAnswered || (currentQuestion?.category === 'Sequence Recall' && isViewingPhase)}
             className={styles.answerInput}

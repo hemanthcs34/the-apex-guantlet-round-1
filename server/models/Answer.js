@@ -6,6 +6,7 @@ const AnswerSchema = new mongoose.Schema({
   questionIndex: { type: Number, required: true },
   pointsAwarded: { type: Number, default: 0 },
   timeTaken: { type: Number, required: true },
+  sessionId: { type: String, required: true }
 });
 
 export default mongoose.models.Answer || mongoose.model("Answer", AnswerSchema);
