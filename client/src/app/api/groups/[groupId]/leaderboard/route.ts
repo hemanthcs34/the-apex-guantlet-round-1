@@ -12,6 +12,7 @@ export async function GET(
     const { groupId } = params;
 
     const group = await Group.findById(groupId);
+    console.log("we found group",group);
     if (!group) {
       return NextResponse.json({ message: "Group not found." }, { status: 404 });
     }

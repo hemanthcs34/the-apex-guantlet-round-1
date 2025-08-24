@@ -5,7 +5,8 @@ const PlayerSchema = new Schema({
   score: { type: Number, default: 0 },
   completedGames: { type: [String], default: [] },
   bonusAnswer: { type: String, default: "" },
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: Date.now },
+  groupId: { type: mongoose.Schema.Types.ObjectId, ref: 'Group' },
 });
 
 const Player = models.Player || mongoose.model("Player", PlayerSchema);
