@@ -127,16 +127,17 @@ export default function Question({ userInfo, socket, currentGroup }) {
   }, [timeLeft, currentQuestion, gameCompleted, isProctor, isViewingPhase]);
 
   const getQuestions = () => {
-    return [
-      [
-        { "category": "Tech Riddle", "question": "I follow you all day but disappear at night. I mimic your every move, yet you never see me. What am I?", "answer": "Shadow", "time_limit": 180 },
-        { "category": "Maths Problem", "question": "Three friends book a hotel room for ₹300. Each pays ₹100. Later, the manager realizes the correct cost is ₹250 and sends ₹50 back with the bellboy. The bellboy keeps ₹20 and gives ₹10 to each friend. Now, each friend paid ₹90 (total ₹270). The bellboy has ₹20, making ₹290. Where did the other ₹10 go?", "answer": "The logic is flawed", "time_limit": 300 },
-        { "category": "Reasoning Puzzle", "question": "Four friends — Arjun, Priya, Kavya, and Mohan — are sitting around a table. Arjun is sitting directly opposite Priya. Kavya is to Arjun's left. Mohan is not sitting next to Priya. Who is sitting to Priya's right?", "answer": "Mohan", "time_limit": 300 },
-        { "category": "Sudoku", "question": "Complete the 4x4 Sudoku Grid: [3, _, 4, _] [_, 1, _, 2] [4, _, 1, _] [_, 3, _, 4]", "answer": "1,2,3,4 in some order in each row, column and 2x2 box", "time_limit": 300 },
-        { "category": "Sequence Recall", "question": "Memorize and find the sum of this sequence: 8, 27, 5, 12, 43, 6, 91, 3, 18, 54, 7, 11, 39, 10, 25", "answer": "359", "time_limit": 300 },
-        { "category": "Bonus", "question": "Step 1: Find the next prime after 31. (Use this as Key 1). Step 2: Sum the digits of Key 1 to get Key 2. Step 3: Shift the letter 'M' forward by Key 2 positions (A=1). What is the final letter?", "answer": "W", "time_limit": 600 }
-      ]
-    ][currentGroup?.questionSetIndex || 0] || [];
+    return new Promise((resolve) => {
+      if (!socket || !currentGroup?.id) return resolve([]);
+      socket.emit('getQuestions', { groupId: currentGroup.id });
+      socket.once('questionsData', (data) => {
+        resolve(data.questions || []);
+      });
+      socket.once('questionsError', (err) => {
+        console.error('Socket error fetching questions:', err);
+        resolve([]);
+      });
+    });
   };
 
   const handleSubmit = (submittedAnswer = null) => {
@@ -191,14 +192,25 @@ export default function Question({ userInfo, socket, currentGroup }) {
     }
   };
 
-  const getQuestionSolutions = () => {
-    const questions = getQuestions();
+  const [solutions, setSolutions] = useState([]);
+
+  const getQuestionSolutions = async () => {
+    const questions = await getQuestions();
     return questions.map((q, index) => ({
       ...q,
       index,
       hint: getAnswerHint(q.category)
     }));
   };
+
+  useEffect(() => {
+    if (showSolutions) {
+      (async () => {
+        const sols = await getQuestionSolutions();
+        setSolutions(sols);
+      })();
+    }
+  }, [showSolutions, currentGroup]);
 
   if (gameCompleted) {
     return (
@@ -258,20 +270,23 @@ export default function Question({ userInfo, socket, currentGroup }) {
                 >
                   {showSolutions ? 'Hide Solutions' : 'See All Answers & Solutions'}
                 </button>
-                
                 {showSolutions && (
                   <div className={styles.solutionsList}>
                     <h3>📚 All Questions & Solutions</h3>
-                    {getQuestionSolutions().map((question, index) => (
-                      <div key={index} className={styles.solutionItem}>
-                        <h4>Question {index + 1}: {question.category}</h4>
-                        <p className={styles.questionText}>{question.question}</p>
-                        <div className={styles.answerInfo}>
-                          <p><strong>Answer:</strong> {question.answer}</p>
-                          <p><strong>Hint:</strong> {question.hint}</p>
+                    {solutions.length === 0 ? (
+                      <p>Loading solutions...</p>
+                    ) : (
+                      solutions.map((question, index) => (
+                        <div key={index} className={styles.solutionItem}>
+                          <h4>Question {index + 1}: {question.category}</h4>
+                          <p className={styles.questionText}>{question.question}</p>
+                          <div className={styles.answerInfo}>
+                            <p><strong>Answer:</strong> {question.answer}</p>
+                            <p><strong>Hint:</strong> {question.hint}</p>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      ))
+                    )}
                   </div>
                 )}
               </div>

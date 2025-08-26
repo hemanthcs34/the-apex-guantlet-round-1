@@ -1,4 +1,5 @@
 import http from 'http';
+import getQuestionsRoute from './routes/getquestions.js';
 import { Server } from 'socket.io';
 import express from 'express';
 import cors from 'cors';
@@ -10,6 +11,7 @@ import Group from './models/Group.js';
 import Participant from './models/Participants.js';
 import Answer from './models/Answer.js';
 
+
 const app = express();
 app.use(cors({
   origin: [
@@ -19,6 +21,9 @@ app.use(cors({
   ],
   credentials: true
 }));
+// Register API routes
+app.use('/api', getQuestionsRoute);
+
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
@@ -33,7 +38,7 @@ const io = new Server(server, {
 });
 
 mongoose.connect(process.env.MONGODB_URI).then(() => console.log("Socket.IO server connected to MongoDB."));
-
+//app.use('/api', getQuestionsRoute);
 const questions = JSON.parse(fs.readFileSync('./utils/questions.json', 'utf-8'));
 
 // Helper function to normalize answers for comparison
@@ -67,6 +72,23 @@ function isAnswerCorrect(userAnswer, correctAnswer) {
 }
 
 io.on('connection', (socket) => {
+  // Socket.IO event to fetch question set for a group
+  socket.on('getQuestions', async ({ groupId }) => {
+    try {
+      console.log('[socket.io] getQuestions for groupId:', groupId);
+      const group = await Group.findById(groupId);
+      if (!group) {
+        socket.emit('questionsError', { message: 'Group not found' });
+        return;
+      }
+      const questionSetIndex = group.questionSetIndex || 0;
+      const questionSet = questions[questionSetIndex] || [];
+      socket.emit('questionsData', { questions: questionSet });
+    } catch (error) {
+      console.error('[socket.io] getQuestions error:', error);
+      socket.emit('questionsError', { message: 'Internal server error' });
+    }
+  });
   console.log(`User connected: ${socket.id}`);
 
   socket.on('joinGroup', async (groupId) => {
@@ -103,21 +125,38 @@ io.on('connection', (socket) => {
   });
 
   socket.on('startRound', async ({ groupId, participantId }) => {
-    const proctor = await Participant.findById(participantId);
-    if (!proctor?.isProctor) return;
-
-    const group = await Group.findById(groupId);
-    if (group) {
-      group.roundStarted = true;
-      group.currentQuestionIndex = 0; // Start from first question
-      await group.save();
-      io.to(groupId).emit('roundStarted');
-      
-      // Send first question immediately
-      const questionSet = questions[group.questionSetIndex] || [];
-      if (questionSet.length > 0) {
-        io.to(groupId).emit('newQuestion', { index: 0, question: questionSet[0] });
+    try {
+      console.log(`startRound called by participant ${participantId} for group ${groupId}`);
+      const proctor = await Participant.findById(participantId);
+      if (!proctor?.isProctor) {
+        console.log(`Participant ${participantId} is not a proctor. Aborting startRound.`);
+        return;
       }
+
+      const group = await Group.findById(groupId);
+      if (group) {
+        group.roundStarted = true;
+        group.currentQuestionIndex = 0; // Start from first question
+        await group.save();
+        io.to(groupId).emit('roundStarted');
+   //     console.log(`Round started for group ${groupId}.`);
+
+        // Send first question immediately
+        const questionSet = questions[group.questionSetIndex] || [];
+        
+//        console.log("question set", questionSet);
+        if (questionSet.length > 0) {
+          io.to(groupId).emit('newQuestion', { index: 0, question: questionSet[0] });
+          console.log(`First question sent to group ${groupId}.`);
+        } else {
+          console.log(`No questions found for group ${groupId} (questionSetIndex: ${group.questionSetIndex}).`);
+        }
+      } else {
+        console.log(`Group ${groupId} not found.`);
+      }
+    } catch (error) {
+      console.error(`Error in startRound for group ${groupId}:`, error);
+      io.to(socket.id).emit('error', { message: 'Failed to start round', details: error.message });
     }
   });
 
@@ -154,6 +193,7 @@ io.on('connection', (socket) => {
 
     const questionSet = questions[group.questionSetIndex];
     const correctAnswer = questionSet[questionIndex].answer;
+
     const isCorrect = isAnswerCorrect(answer, correctAnswer);
     let points = 0;
 
@@ -161,7 +201,13 @@ io.on('connection', (socket) => {
       // Rank among already-correct submissions for this question
       const correctCount = await Answer.countDocuments({ groupId, questionIndex, pointsAwarded: { $gt: 0 } });
       const rank = correctCount + 1;
-      const pointValues = { 1: 10, 2: 8, 3: 5, 4: 2 };
+      let pointValues;
+      if (questionSet[questionIndex].category === 'Bonus') {
+        console.log('bonus');
+        pointValues = { 1: 15 };
+      } else {
+        pointValues = { 1: 10, 2: 8, 3: 5, 4: 2 };
+      }
       points = pointValues[rank] || 0;
     }
 
@@ -183,6 +229,7 @@ io.on('connection', (socket) => {
     console.log(`User disconnected: ${socket.id}`);
   });
 });
+
 
 // Handle game completion and determine winners
 async function handleGameCompletion(groupId) {

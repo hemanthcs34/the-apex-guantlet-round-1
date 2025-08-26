@@ -2,6 +2,19 @@ import { useState, useEffect } from 'react';
 import styles from './Lobby.module.css';
 
 export default function Lobby({ participants, userInfo, socket, currentGroup, currentQuestionIndex }) {
+    useEffect(() => {
+      // Fetch participants on mount if currentGroup exists
+      if (currentGroup && currentGroup.id) {
+        fetch(`/api/groups/${currentGroup.id}/participants`)
+          .then(res => res.ok ? res.json() : null)
+          .then(data => {
+            if (data && data.participants) {
+              // Optionally update participants state if you want to keep it in Lobby
+              // setParticipants(data.participants); // Uncomment if you want local state
+            }
+          });
+      }
+    }, [currentGroup]);
   const [leaderboard, setLeaderboard] = useState(null);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
 
@@ -24,11 +37,25 @@ export default function Lobby({ participants, userInfo, socket, currentGroup, cu
   };
 
   const handleStart = () => {
-    if (socket && userInfo) {
-      socket.emit('startRound', { 
-        groupId: userInfo.groupId, 
-        participantId: userInfo.participantId 
-      });
+    try {
+      console.log('handleStart called');
+      console.log('socket:', socket);
+      console.log('userInfo:', userInfo);
+      if (socket && userInfo) {
+        console.log('Emitting startRound with:', {
+          groupId: userInfo.groupId,
+          participantId: userInfo.participantId
+        });
+        socket.emit('startRound', {
+          groupId: userInfo.groupId,
+          participantId: userInfo.participantId
+        });
+        console.log("startRound event emitted");
+      } else {
+        console.error('Socket or userInfo not available');
+      }
+    } catch (error) {
+      console.error('Error starting round:', error);
     }
   };
 

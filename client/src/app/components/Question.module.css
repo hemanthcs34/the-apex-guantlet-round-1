@@ -1,12 +1,17 @@
+/* --- Main Container --- */
 .container {
   max-width: 800px;
-  margin: 0 auto;
+  margin: 2rem auto;
   padding: 2rem;
-  background: var(--card-bg);
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(14px) saturate(140%);
+  animation: fadeInUp 0.8s ease both;
 }
 
+/* --- Header --- */
 .header {
   display: flex;
   justify-content: space-between;
@@ -19,173 +24,258 @@
 }
 
 .header h2 {
-  color: var(--text-color);
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
+/* --- Timer --- */
 .timer {
-  background: #ff6b6b;
+  background: linear-gradient(135deg, #ff6b6b, #ff3b3b);
   color: white;
-  padding: 8px 16px;
-  border-radius: 20px;
+  padding: 10px 20px;
+  border-radius: 24px;
   font-weight: bold;
   font-size: 1.1rem;
   white-space: nowrap;
+  box-shadow: 0 0 10px rgba(255, 107, 107, 0.8);
+  animation: pulseGlow 1.5s infinite;
 }
 
+/* --- Question Block --- */
 .question {
   margin-bottom: 2rem;
 }
 
 .question h3 {
-  color: var(--text-muted);
   margin-bottom: 1rem;
+  color: var(--text-muted);
+  font-size: 1.1rem;
 }
 
 .question p {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   line-height: 1.6;
   color: var(--text-color);
 }
 
+/* --- Hints --- */
 .hint {
-  color: #f59e0b;
-  font-style: italic;
   margin-top: 0.5rem;
-  padding: 0.5rem;
+  padding: 0.6rem 1rem;
+  font-style: italic;
+  color: #f59e0b;
   background: rgba(245, 158, 11, 0.1);
-  border-radius: 6px;
+  border-radius: 8px;
+  border-left: 4px solid #f59e0b;
 }
 
 .answerHint {
   margin-top: 1rem;
   padding: 1rem;
-  background: rgba(13, 110, 253, 0.1);
-  border: 1px solid rgba(13, 110, 253, 0.2);
-  border-radius: 8px;
+  background: rgba(13, 110, 253, 0.08);
+  border: 1px solid rgba(13, 110, 253, 0.25);
+  border-radius: 10px;
 }
 
 .hintText {
   margin: 0;
   color: var(--text-color);
   font-size: 0.95rem;
-  line-height: 1.5;
 }
 
+/* --- Answer Section --- */
 .answerSection {
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   margin-bottom: 2rem;
-  flex-wrap: wrap;
 }
 
 .answerInput {
   flex: 1;
   min-width: 200px;
   padding: 12px;
-  border: 2px solid var(--border-color);
-  border-radius: 8px;
-  font-size: 16px;
-  background: var(--card-bg);
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.06);
   color: var(--text-color);
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .answerInput:focus {
   outline: none;
   border-color: var(--primary-color);
+  box-shadow: 0 0 10px var(--primary-color);
 }
 
 .submitButton {
   padding: 12px 24px;
-  background: #28a745;
-  color: white;
   border: none;
-  border-radius: 8px;
-  font-size: 16px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s;
-  white-space: nowrap;
+  color: white;
+  background: linear-gradient(135deg, #28a745, #218838);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .submitButton:hover:not(:disabled) {
-  background: #218838;
+  transform: translateY(-2px);
+  box-shadow: 0 0 14px #28a745;
 }
 
 .submitButton:disabled {
-  background: #ccc;
+  background: #555;
+  opacity: 0.6;
   cursor: not-allowed;
 }
 
+/* --- Results / Game Over --- */
 .result {
   text-align: center;
   padding: 1rem;
-  background: #e8f5e8;
-  border-radius: 8px;
-  color: #155724;
+  border-radius: 10px;
+  background: rgba(40, 167, 69, 0.15);
+  color: #28a745;
+  font-weight: 600;
 }
 
-.proctorControls {
-  text-align: center;
-  margin-top: 2rem;
-  padding: 1rem;
-  background: rgba(0, 123, 255, 0.1);
-  border-radius: 8px;
-}
-
-/* Game Over Styles */
 .gameOver {
   text-align: center;
   padding: 2rem;
+  animation: fadeInUp 1s ease both;
 }
 
 .gameOver h1 {
   color: #28a745;
   font-size: 2.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 8px rgba(40, 167, 69, 0.7);
 }
 
+/* --- Leaderboard Players --- */
+.advancingPlayer, .remainingPlayer {
+  background: rgba(255, 255, 255, 0.06);
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 4px solid #28a745;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  backdrop-filter: blur(8px);
+}
+
+.advancingPlayer {
+  border-left-color: #ffc107;
+  background: rgba(255, 248, 225, 0.1);
+}
+
+.rank {
+  background: #007bff;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.advancingPlayer .rank {
+  background: #ffc107;
+  color: #333;
+}
+
+/* --- Solutions Section --- */
+.solutionsButton {
+  background: linear-gradient(135deg, var(--secondary-color), #7c3aed);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.solutionsButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 14px var(--secondary-color);
+}
+
+.solutionsList {
+  margin-top: 1rem;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+}
+
+/* --- Animations --- */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 8px rgba(255, 107, 107, 0.8); }
+  50% { box-shadow: 0 0 16px rgba(255, 107, 107, 1); }
+}
+
+/* --- Responsiveness --- */
+@media (max-width: 768px) {
+  .container { padding: 1rem; }
+  .header { flex-direction: column; text-align: center; }
+  .submitButton { width: 100%; }
+  .gameOver h1 { font-size: 2rem; }
+}
+
+/* --- Game Complete Results Section --- */
 .results {
   text-align: left;
-  max-width: 600px;
-  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 14px;
+  background: rgba(40, 167, 69, 0.08);
+  color: var(--text-color);
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 16px rgba(40, 167, 69, 0.07);
 }
 
 .results h2 {
-  color: var(--text-color);
-  text-align: center;
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 2px solid var(--border-color);
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: #28a745;
+  font-weight: 700;
 }
 
 .advancementRules {
-  background: #e3f2fd;
-  border-radius: 8px;
-  padding: 1.5rem;
-  margin-bottom: 2rem;
-  border-left: 4px solid #1976d2;
-}
-
-.advancementRules h3 {
-  color: #1976d2;
-  margin: 0 0 1rem 0;
+  margin-bottom: 1.5rem;
+  background: rgba(255, 248, 225, 0.13);
+  border-radius: 10px;
+  padding: 1rem;
+  border-left: 4px solid #ffc107;
 }
 
 .rulesMessage {
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 1rem;
+  color: #f59e0b;
+  font-style: italic;
+  margin-bottom: 0.5rem;
 }
 
 .advancingSection, .remainingSection {
-  margin-bottom: 2rem;
-}
-
-.advancingSection h3, .remainingSection h3 {
-  color: var(--text-color);
-  margin-bottom: 1rem;
-  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
 }
 
 .advancingList, .remainingList {
@@ -195,22 +285,23 @@
 }
 
 .advancingPlayer, .remainingPlayer {
-  background: var(--card-bg);
+  background: rgba(255, 255, 255, 0.06);
   padding: 1rem;
-  border-radius: 8px;
+  border-radius: 12px;
   margin-bottom: 0.75rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-left: 4px solid #28a745;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
   flex-wrap: wrap;
   gap: 0.5rem;
+  backdrop-filter: blur(8px);
 }
 
 .advancingPlayer {
   border-left-color: #ffc107;
-  background: #fff8e1;
+  background: rgba(255, 248, 225, 0.1);
 }
 
 .rank {
@@ -218,10 +309,8 @@
   color: white;
   padding: 6px 12px;
   border-radius: 16px;
-  font-size: 14px;
   font-weight: bold;
-  min-width: 40px;
-  text-align: center;
+  font-size: 0.9rem;
 }
 
 .advancingPlayer .rank {
@@ -230,222 +319,93 @@
 }
 
 .name {
-  flex: 1;
-  margin: 0 1rem;
-  font-weight: 500;
-  font-size: 1.1rem;
-  min-width: 120px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--text-color);
 }
 
 .score {
+  font-size: 1rem;
   color: #28a745;
-  font-weight: bold;
-  font-size: 1.2rem;
-  white-space: nowrap;
+  font-weight: 500;
 }
 
 .summary {
-  background: var(--card-bg);
-  padding: 1.5rem;
-  border-radius: 8px;
-  margin-top: 2rem;
-  text-align: center;
-  border: 1px solid var(--border-color);
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: rgba(40, 167, 69, 0.07);
+  border-radius: 10px;
+  font-size: 1rem;
 }
 
-.summary p {
-  margin: 0.5rem 0;
-  font-size: 1.1rem;
-  color: var(--text-color);
-}
-
-/* Solutions Section */
 .solutionsSection {
   margin-top: 2rem;
-  text-align: center;
 }
 
 .solutionsButton {
-  background: var(--secondary-color);
+  background: linear-gradient(135deg, var(--secondary-color), #7c3aed);
   color: white;
   border: none;
   padding: 12px 24px;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  border-radius: 10px;
+  font-size: 1rem;
   font-weight: 600;
-  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .solutionsButton:hover {
-  background: #7c3aed;
+  transform: translateY(-2px);
+  box-shadow: 0 0 14px var(--secondary-color);
 }
 
 .solutionsList {
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 1.5rem;
   margin-top: 1rem;
-  text-align: left;
-}
-
-.solutionsList h3 {
-  color: var(--text-color);
-  text-align: center;
-  margin: 0 0 1.5rem 0;
-  font-size: 1.3rem;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
 }
 
 .solutionItem {
-  background: rgba(248, 249, 250, 0.1);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
+  margin-bottom: 1.2rem;
   padding: 1rem;
-  margin-bottom: 1rem;
-}
-
-.solutionItem:last-child {
-  margin-bottom: 0;
+  background: rgba(13, 110, 253, 0.06);
+  border-radius: 8px;
+  border-left: 4px solid #7c3aed;
 }
 
 .solutionItem h4 {
-  color: var(--primary-color);
-  margin: 0 0 0.75rem 0;
+  margin: 0 0 0.5rem 0;
   font-size: 1.1rem;
+  color: #7c3aed;
 }
 
 .questionText {
+  margin: 0 0 0.5rem 0;
   color: var(--text-color);
-  margin: 0 0 0.75rem 0;
   font-size: 1rem;
-  line-height: 1.5;
 }
 
 .answerInfo {
-  background: rgba(40, 167, 69, 0.1);
-  border: 1px solid rgba(40, 167, 69, 0.2);
-  border-radius: 6px;
-  padding: 0.75rem;
+  margin-top: 0.5rem;
+  font-size: 0.98rem;
 }
 
 .answerInfo p {
-  margin: 0.25rem 0;
-  color: var(--text-color);
-  font-size: 0.9rem;
+  margin: 0.2rem 0;
 }
 
-/* Mobile Responsiveness */
 @media (max-width: 768px) {
-  .container {
-    padding: 1rem;
-    margin: 0 0.5rem;
-  }
-  
-  .header {
-    flex-direction: column;
-    text-align: center;
-    gap: 1rem;
-  }
-  
-  .header h2 {
-    font-size: 1.3rem;
-  }
-  
-  .timer {
-    font-size: 1rem;
-    padding: 6px 12px;
-  }
-  
-  .answerSection {
-    flex-direction: column;
-  }
-  
-  .answerInput {
-    min-width: auto;
-  }
-  
-  .submitButton {
-    width: 100%;
-  }
-  
-  .advancingPlayer, .remainingPlayer {
-    flex-direction: column;
-    text-align: center;
-    gap: 0.5rem;
-  }
-  
-  .name {
-    margin: 0;
-    text-align: center;
-  }
-  
-  .gameOver h1 {
-    font-size: 2rem;
-  }
-  
-  .results {
-    padding: 0 1rem;
-  }
-  
-  .solutionsList {
-    padding: 1rem;
-  }
-  
-  .solutionItem {
-    padding: 0.75rem;
-  }
+  .results { padding: 1rem; }
+  .solutionsList { padding: 1rem; }
+  .solutionItem { padding: 0.75rem; }
 }
 
 @media (max-width: 480px) {
-  .container {
-    padding: 0.5rem;
-    margin: 0 0.25rem;
-  }
-  
-  .question p {
-    font-size: 1rem;
-  }
-  
-  .advancementRules {
-    padding: 1rem;
-  }
-  
-  .answerHint {
-    padding: 0.75rem;
-  }
-  
-  .hintText {
-    font-size: 0.9rem;
-  }
-  
-  .solutionsButton {
-    padding: 10px 20px;
-    font-size: 14px;
-  }
-  
-  .solutionsList {
-    padding: 0.75rem;
-  }
-  
-  .solutionItem {
-    padding: 0.5rem;
-  }
-  
-  .solutionItem h4 {
-    font-size: 1rem;
-  }
-  
-  .questionText {
-    font-size: 0.9rem;
-  }
-  
-  .answerInfo {
-    padding: 0.5rem;
-  }
-  
-  .answerInfo p {
-    font-size: 0.85rem;
-  }
+  .results { padding: 0.5rem; }
+  .solutionsList { padding: 0.5rem; }
+  .solutionItem { padding: 0.5rem; }
+  .advancingPlayer, .remainingPlayer { flex-direction: column; align-items: flex-start; }
 }

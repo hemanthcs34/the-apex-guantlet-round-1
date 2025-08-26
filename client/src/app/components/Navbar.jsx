@@ -5,9 +5,10 @@ export default function Navbar() {
   return (
     <nav className={styles.nav}>
       <div className={styles.container}>
-        <Link href="/" className={styles.title}>
-          ⚡ The Apex Gauntlet
-        </Link>
+       
+        <div className={styles.logo}>
+          <img src="/images/IEEE-LOGO.jpg" alt="Logo" width={42} height={42} style={{ objectFit: 'cover', display: 'block' }} />
+        </div>
         <div className={styles.links}>
           <Link href="/leaderboard" className={styles.link}>
             Leaderboard

@@ -1,25 +1,69 @@
-.nav {
-  position: sticky; top: 0; z-index: 50; width: 100%;
-  background-color: rgba(31, 41, 55, 0.8);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(75, 85, 99, 0.3);
+/* --- Main Navbar Container --- */
+.navbar {
+  display: grid;
+  /* Creates three columns:
+     1fr: Left column takes 1 share of the free space.
+     auto: Middle column sizes to its content.
+     1fr: Right column takes 1 share of the free space.
+     This ensures the middle column is always perfectly centered. */
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center; /* Vertically aligns all items */
+  padding: 0.75rem 2rem; /* Vertical and horizontal padding */
+  background-color: #1e293b; /* Using a color from your theme */
+  border-bottom: 1px solid #334155;
+  gap: 1rem; /* Space between elements */
+  width: 100%;
 }
-.container {
-  max-width: 1280px; margin: 0 auto;
-  padding: 0.75rem 1.5rem; display: flex;
-  justify-content: space-between; align-items: center;
+
+/* --- Logo Section (Left) --- */
+.navbarLogo {
+  justify-self: start; /* Aligns this grid item to the start of its column */
 }
-.title {
-  font-size: 1.5rem; font-weight: 700;
-  background-image: linear-gradient(to right, #8b5cf6, #22d3ee);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
+
+/* --- Title Section (Center) --- */
+.navbarTitle {
+  justify-self: center; /* Ensures it's centered within its column */
 }
+
+.titleLink {
+  color: #f1f5f9; /* Using a text color from your theme */
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.titleLink:hover {
+  color: #3b82f6; /* Using primary color from your theme */
+}
+
+/* Hide title on smaller screens to prevent overlapping */
+@media (max-width: 768px) {
+  .navbarTitle {
+    display: none;
+  }
+  /* Adjust grid for two columns on mobile */
+  .navbar {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* --- Links Section (Right) --- */
+.navbarLinks {
+  justify-self: end; /* Aligns this grid item to the end of its column */
+  display: flex;
+  align-items: center;
+  gap: 1.5rem; /* Space between links and buttons */
+}
+
 .link {
-  padding: 0.5rem 1rem; font-size: 0.875rem; color: #e5e7eb;
-  background-color: rgba(55, 65, 81, 0.6);
-  border-radius: 0.5rem; border: 1px solid #4b5563;
-  text-decoration: none; transition: all 0.2s;
+  color: #94a3b8; /* Using muted text color from your theme */
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: color 0.2s ease;
 }
+
 .link:hover {
-  background-color: rgba(75, 85, 99, 0.8);
+  color: #f1f5f9; /* Brighter text on hover */
 }
