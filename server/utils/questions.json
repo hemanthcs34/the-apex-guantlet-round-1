@@ -125,6 +125,97 @@
     { "category": "Reasoning Puzzle", "question": "A gear with 15 teeth drives a gear with 45 teeth. If the small gear turns at 900 rpm, how fast does the large gear turn?", "answer": "300", "time_limit": 300 },
     { "category": "Sudoku", "question": "Complete the 4x4 Sudoku Grid: [_, 4, 2, _] [3, _, _, 1] [_, 2, _, 3] [1, _, 4, _]", "answer": "1,4,2,3,3,2,4,1,4,1,3,2,2,3,1,4", "time_limit": 300 },
     { "category": "Sequence Recall", "question": "Memorize and find the sum of this sequence: 19, 23, 29, 31, 37, 41, 43, 47, 53, 59", "answer": "382", "time_limit": 300 },
+    { "category": "Bonus", "question": "Step 1: How many months have fewer than 31 days? (Key 1). Step 2: Key 2 = Key 1 * 2. Step 3: Use Key 2 as a 1-based index into 'NU    { "category": "Reasoning Puzzle", "question": "At what time between 3 and 4 o’clock do the hour and minute hands overlap?", "answer": "3:16", "time_limit": 300 },
+    { "category": "Sudoku", "question": "Complete the 4x4 Sudoku Grid: [_, 3, 1, _] [1, _, _, 2] [2, _, _, 4] [_, 4, 3, _]", "answer": "4,3,1,2,1,4,3,2,2,1,4,3,3,4,2,1", "time_limit": 300 },
+    { "category": "Sequence Recall", "question": "Memorize and find the sum of this sequence: 9, 81, 17, 6, 24, 100, 12, 3, 5, 15, 42, 29, 7", "answer": "350", "time_limit": 300 },
+    { "category": "Bonus", "question": "Step 1: Sum of proper divisors of 28 (excluding 28). (Key 1). Step 2: Count the number of letters in the English word for Key 1 (Key 2). Step 3: Find the Key 2-th letter of 'MATHEMATICS'.", "answer": "S", "time_limit": 600 }
+  ],
+  [
+    { "category": "Tech Riddle", "question": "I have keys but no locks, space but no room, and you can enter but not go inside. What am I?", "answer": "keyboard", "time_limit": 180 },
+    { "category": "Maths Problem", "question": "A 200m long train travels at 40 m/s. A tunnel is 1000m long. How long does it take for the entire train to pass through the tunnel?", "answer": "30", "time_limit": 300 },
+    { "category": "Reasoning Puzzle", "question": "A train 120m long moves at 60 km/h. How long to pass a pole?", "answer": "7.2", "time_limit": 300 },
+    { "category": "Sudoku", "question": "Complete the 4x4 Sudoku Grid: [_, 2, _, 3] [3, _, 1, _] [_, 1, _, 4] [4, _, 2, _]", "answer": "1,2,4,3,3,4,1,2,2,1,3,4,4,3,2,1", "time_limit": 300 },
+    { "category": "Sequence Recall", "question": "Memorize and find the sum of this sequence: 0.5, 1.5, 2.25, 4.75, 8, 16, 32, 0.75, 3.5, 6.25, 9.125", "answer": "84.625", "time_limit": 300 },
+    { "category": "Bonus", "question": "Step 1: Solve for x in 2x + 3 = 13. (Key 1). Step 2: Calculate the factorial of Key 1. (Key 2). Step 3: Sum the digits of Key 2.", "answer": "3", "time_limit": 600 }
+  ],
+  [
+    { "category": "Tech Riddle", "question": "I speak without a mouth and hear without ears. I have no body, but I come alive with the wind. What am I?", "answer": "echo", "time_limit": 180 },
+    { "category": "Maths Problem", "question": "A monkey and a weight of equal mass hang from opposite ends of a rope over a frictionless pulley. If the monkey climbs the rope, what does the weight do?", "answer": "nothing", "time_limit": 300 },
+    { "category": "Reasoning Puzzle", "question": "Four students — an artist, a coder, a climber, and a dancer — sit in a row. The coder is left of the dancer. The climber is not at an end. The artist is between the coder and climber. What is the order?", "answer": "coder,artist,climber,dancer", "time_limit": 300 },
+    { "category": "Sudoku", "question": "Complete the 4x4 Sudoku Grid: [2, _, 4, _] [_, 1, _, 3] [3, _, 2, _] [_, 4, _, 1]", "answer": "2,3,4,1,4,1,2,3,3,4,1,2,1,2,3,4", "time_limit": 300 },
+    { "category": "Sequence Recall", "question": "Memorize and find the sum of this sequence: 250, -50, 25, -25, 10, 5, 100, -10, 60, -5, 15", "answer": "375", "time_limit": 300 },
+    { "category": "Bonus", "question": "Step 1: Count prime numbers less than 20. (Key 1). Step 2: Key 2 = (Key 1 * 2) + 1. Step 3: Use Key 2 as a 1-based index into 'PUZZLING' (wrap if needed). Which letter?", "answer": "P", "time_limit": 600 }
+  ],
+  [
+    { "category": "Tech Riddle", "question": "I am taken from a mine and shut in a wooden case, from which I am never released, yet I am used by almost every person. What am I?", "answer": "pencil", "time_limit": 180 },
+    { "category": "Maths Problem", "question": "A plate’s length is 2.30m (3 significant figures) and width is 1.5m (2 significant figures). What is the area reported with correct significant figures?", "answer": "3.4", "time_limit": 300 },
+    { "category": "Reasoning Puzzle", "question": "You have two identical boxes with a light bulb inside each. One has a switch with a 10-second delay. You can flip each switch once then open both boxes. How do you identify the delayed one?", "answer": "flip one, wait 10s, flip the other, open both", "time_limit": 300 },
+    { "category": "Sudoku", "question": "Complete the 4x4 Sudoku Grid: [_, 4, _, 2] [1, _, 3, _] [_, 2, _, 4] [4, _, 1, _]", "answer": "3,4,1,2,1,2,3,4,2,1,4,3,4,3,2,1", "time_limit": 300 },
+    { "category": "Sequence Recall", "question": "Memorize and find the sum of this sequence: 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3", "answer": "36", "time_limit": 300 },
+    { "category": "Bonus", "question": "Step 1: What is the GCD of 48 and 18? (Key 1). Step 2: Key 2 = Key 1 + 4. Step 3: Key 2 as a 1-based index into 'REASON'. Which letter?", "answer": "S", "time_limit": 600 }
+  ],
+  [
+    { "category": "Tech Riddle", "question": "The more you take, the more you leave behind. What am I?", "answer": "footsteps", "time_limit": 180 },
+    { "category": "Maths Problem", "question": "Two resistors, 2 Ω and 8 Ω, are connected in parallel. Which resistor carries more current and why?", "answer": "2", "time_limit": 300 },
+    { "category": "Reasoning Puzzle", "question": "A farmer must carry a wolf, a goat, and a cabbage across a river in a boat that holds only him and one item. The wolf eats the goat, the goat eats the cabbage if left alone. What is the minimum number of crossings?", "answer": "7", "time_limit": 300 },
+    { "category": "Sudoku", "question": "Complete the 4x4 Sudoku Grid: [3, _, 2, _] [_, 4, _, 1] [1, _, 4, _] [_, 2, _, 3]", "answer": "3,1,2,4,2,4,3,1,1,3,4,2,4,2,1,3", "time_limit": 300 },
+    { "category": "Sequence Recall", "question": "Memorize and find the sum of this sequence: 11, 22, 33, 44, 55, 66, 77, 88, 99, 110", "answer": "605", "time_limit": 300 },
+    { "category": "Bonus", "question": "Step 1: (Edges on a cube) - (Faces on a cube). (Key 1). Step 2: Key 2 = Key 1 * 3. Step 3: Key 2 as a 1-based index into 'LOGIC' (wrap). Which letter?", "answer": "G", "time_limit": 600 }
+  ],
+  [
+    { "category": "Tech Riddle", "question": "I fly without wings, I cry without eyes. Wherever I go, darkness follows me. What am I?", "answer": "cloud", "time_limit": 180 },
+    { "category": "Maths Problem", "question": "A pump can fill a tank in 5 hours, but a leak can empty it in 20 hours. If both are active, how long will it take to fill the tank?", "answer": "6.67", "time_limit": 300 },
+    { "category": "Reasoning Puzzle", "question": "10L of 10% salt solution is mixed with 20L of 40% salt solution. What is the final concentration?", "answer": "30", "time_limit": 300 },
+    { "category": "Sudoku", "question": "Complete the 4x4 Sudoku Grid: [_, 1, _, 2] [4, _, 1, _] [_, 3, _, 4] [2, _, 3, _]", "answer": "3,1,4,2,4,2,1,3,1,3,2,4,2,4,3,1", "time_limit": 300 },
+    { "category": "Sequence Recall", "question": "Memorize and find the sum of this sequence: 0.1, 0.2, 0.3, 0.4, 0.5, 1.0, 2.0, 4.0, 8.0, 16.0", "answer": "32.5", "time_limit": 300 },
+    { "category": "Bonus", "question": "Step 1: Smallest even composite number. (Key 1). Step 2: Key 2 = Key 1 squared. Step 3: Sum the digits of Key 2.", "answer": "7", "time_limit": 600 }
+  ],
+  [
+    { "category": "Tech Riddle", "question": "I can be a guardian or a thief. I hide in plain sight, yet you may never see me. What am I?", "answer": "hacker", "time_limit": 180 },
+    { "category": "Maths Problem", "question": "An engineer scores 90% on a test with 20% weight and 70% on a test with 80% weight. What is the final percentage?", "answer": "74", "time_limit": 300 },
+    { "category": "Reasoning Puzzle", "question": "A and B together finish a job in 6 hours. A alone takes 10 hours. How long would B take alone?", "answer": "15", "time_limit": 300 },
+    { "category": "Sudoku", "question": "Complete the 4x4 Sudoku Grid: [1, _, _, 4] [_, 2, 3, _] [3, _, _, 2] [_, 4, 1, _]", "answer": "1,3,2,4,4,2,3,1,3,1,4,2,2,4,1,3", "time_limit": 300 },
+    { "category": "Sequence Recall", "question": "Memorize and find the sum of this sequence: 37, -12, 5, 0, 18, 29, -7, 44, 11, -3, 20", "answer": "142", "time_limit": 300 },
+    { "category": "Bonus", "question": "Step 1: How many letters in 'SYMMETRY'? (Key 1). Step 2: Key 2 = Key 1 - 3. Step 3: Find the Key 2-th letter of 'PATTERN'.", "answer": "E", "time_limit": 600 }
+  ],
+  [
+    { "category": "Tech Riddle", "question": "I have many eyes but cannot see, many ears but cannot hear. I store secrets but cannot speak. What am I?", "answer": "server", "time_limit": 180 },
+    { "category": "Maths Problem", "question": "If a component price increases by 50% and then decreases by 50%, is it back to the original price?", "answer": "no", "time_limit": 300 },
+    { "category": "Reasoning Puzzle", "question": "A clock loses 5 minutes every hour. If set right at noon, what time will it show when the true time is 4:00 PM?", "answer": "3:40", "time_limit": 300 },
+    { "category": "Sudoku", "question": "Complete the 4x4 Sudoku Grid: [_, 3, 2, _] [2, _, _, 4] [4, _, _, 1] [_, 1, 3, _]", "answer": "1,3,2,4,2,1,3,4,4,2,1,3,3,1,4,2", "time_limit": 300 },
+    { "category": "Sequence Recall", "question": "Memorize and find the sum of this sequence: 14, 28, 42, 56, 70, 84, 98, 112, 126, 140, 154", "answer": "924", "time_limit": 300 },
+    { "category": "Bonus", "question": "Step 1: If a polygon's interior angles sum to 540 degrees, how many sides does it have? (Key 1). Step 2: Key 2 = Key 1 - 2. Step 3: Find the Key 2-th letter of 'PUZZLES'.", "answer": "Z", "time_limit": 600 }
+  ],
+  [
+    { "category": "Tech Riddle", "question": "The person who makes me has no need for me. The person who buys me won’t use me. The person who uses me won’t know it. What am I?", "answer": "honeypot", "time_limit": 180 },
+    { "category": "Maths Problem", "question": "Two identical 12V batteries are connected in series. What is the resulting voltage and capacity?", "answer": "24", "time_limit": 300 },
+    { "category": "Reasoning Puzzle", "question": "You have 8 coins, one is heavier. Using a balance scale, what is the minimum number of weighings to find it?", "answer": "2", "time_limit": 300 },
+    { "category": "Sudoku", "question": "Complete the 4x4 Sudoku Grid: [3, _, 4, _] [_, 2, _, 1] [2, _, 1, _] [_, 3, _, 2]", "answer": "3,1,4,2,4,2,3,1,2,4,1,3,1,3,2,4", "time_limit": 300 },
+    { "category": "Sequence Recall", "question": "Memorize and find the sum of this sequence: 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60", "answer": "390", "time_limit": 300 },
+    { "category": "Bonus", "question": "Step 1: How many degrees in a straight line? (Key 1). Step 2: Sum the digits of Key 1. (Key 2). Step 3: Use Key 2 as a 1-based index into 'BINARY' (wrap). Which letter?", "answer": "N", "time_limit": 600 }
+  ],
+  [
+    { "category": "Tech Riddle", "question": "I am a shield yet not made of metal. I block attacks but cannot strike back. What am I?", "answer": "firewall", "time_limit": 180 },
+    { "category": "Maths Problem", "question": "You have 8 identical-looking coins; one is heavier. What is the fewest weighings needed with a balance scale to find it?", "answer": "2", "time_limit": 300 },
+    { "category": "Reasoning Puzzle", "question": "Three wires go to two lamps A and B. A switch toggles them in an unknown pattern. What is the minimum number of toggles to identify which wires go to which lamp?", "answer": "2", "time_limit": 300 },
+    { "category": "Sudoku", "question": "Complete the 4x4 Sudoku Grid: [_, 1, 2, _] [3, _, _, 4] [_, 2, _, 3] [4, _, 1, _]", "answer": "4,1,2,3,3,2,1,4,1,4,3,2,2,3,4,1", "time_limit": 300 },
+    { "category": "Sequence Recall", "question": "Memorize and find the sum of this sequence: 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024", "answer": "2046", "time_limit": 300 },
+    { "category": "Bonus", "question": "Step 1: Number of minutes in half an hour. (Key 1). Step 2: Key 2 = Key 1 + 7. Step 3: Use Key 2 as a 1-based index into 'SCIENCE' (wrap). Which letter?", "answer": "C", "time_limit": 600 }
+  ],
+  [
+    { "category": "Tech Riddle", "question": "I travel the world without moving an inch. I can be in multiple places at once, yet I weigh nothing. What am I?", "answer": "website", "time_limit": 180 },
+    { "category": "Maths Problem", "question": "Mix 10L of 10% salt solution with 20L of 40% salt solution. What is the resulting concentration?", "answer": "30", "time_limit": 300 },
+    { "category": "Reasoning Puzzle", "question": "A machine makes 120 widgets/hr for 2 hrs, then 80/hr for 3 hrs. What is the average production rate over 5 hours?", "answer": "96", "time_limit": 300 },
+    { "category": "Sudoku", "question": "Complete the 4x4 Sudoku Grid: [4, _, 3, _] [_, 1, _, 2] [2, _, 1, _] [_, 3, _, 4]", "answer": "4,2,3,1,3,1,4,2,2,4,1,3,1,3,2,4", "time_limit": 300 },
+    { "category": "Sequence Recall", "question": "Memorize and find the sum of this sequence: 7.5, 2.5, -1.0, 13.75, 0.25, 9.5, 6.0, 4.75, 11.0, -2.25", "answer": "52", "time_limit": 300 },
+    { "category": "Bonus", "question": "Step 1: Calculate 11 - 7. (Key 1). Step 2: Calculate 3 to the power of Key 1. (Key 2). Step 3: Sum the digits of Key 2.", "answer": "9", "time_limit": 600 }
+  ],
+  [
+    { "category": "Tech Riddle", "question": "I learn from all, yet I have no mind. I improve with data, but I don’t understand. What am I?", "answer": "machine learning model", "time_limit": 180 },
+    { "category": "Maths Problem", "question": "A gear with 20 teeth drives another with 80 teeth. If the smaller gear spins at 600 rpm, what is the speed of the larger gear?", "answer": "150", "time_limit": 300 },
+    { "category": "Reasoning Puzzle", "question": "A gear with 15 teeth drives a gear with 45 teeth. If the small gear turns at 900 rpm, how fast does the large gear turn?", "answer": "300", "time_limit": 300 },
+    { "category": "Sudoku", "question": "Complete the 4x4 Sudoku Grid: [_, 4, 2, _] [3, _, _, 1] [_, 2, _, 3] [1, _, 4, _]", "answer": "1,4,2,3,3,2,4,1,4,1,3,2,2,3,1,4", "time_limit": 300 },
+    { "category": "Sequence Recall", "question": "Memorize and find the sum of this sequence: 19, 23, 29, 31, 37, 41, 43, 47, 53, 59", "answer": "382", "time_limit": 300 },
     { "category": "Bonus", "question": "Step 1: How many months have fewer than 31 days? (Key 1). Step 2: Key 2 = Key 1 * 2. Step 3: Use Key 2 as a 1-based index into 'NUMBER' (wrap). Which letter?", "answer": "B", "time_limit": 600 }
   ],
   [
