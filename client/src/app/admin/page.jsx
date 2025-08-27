@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import styles from "./admin.module.css";
+import { color } from "framer-motion";
 
 export default function AdminPage() {
   const [groups, setGroups] = useState([]);
@@ -343,11 +344,11 @@ export default function AdminPage() {
             <div className={styles.instructions}>
               <h3>📋 How to Manage</h3>
               <ol>
-                <li>Distribute room codes to participants</li>
-                <li>Track scores & group status live</li>
-                <li>Reset scores between rounds</li>
-                <li>Export tournament data anytime</li>
-                <li>See all participants globally</li>
+                <li style={{ color: "white" }}>Distribute room codes to participants</li>
+                <li style={{ color: "white" }}>Track scores & group status live</li>
+                <li style={{ color: "white" }}>Reset scores between rounds</li>
+                <li style={{ color: "white" }}>Export tournament data anytime</li>
+                <li style={{ color: "white" }}>See all participants globally</li>
               </ol>
             </div>
           </div>

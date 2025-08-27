@@ -44,7 +44,7 @@
 
 .tab {
   background: transparent;
-  color: var(--text-muted);
+  color: white;
   border: none;
   padding: 1rem 1.5rem;
   font-size: 16px;
@@ -56,12 +56,12 @@
 }
 
 .tab:hover {
-  color: var(--text-color);
+  color: white;
   background: rgba(255, 255, 255, 0.05);
 }
 
 .activeTab {
-  color: var(--primary-color);
+  color: white;
   border-bottom-color: var(--primary-color);
   background: rgba(0, 123, 255, 0.08);
   font-weight: 600;
@@ -182,7 +182,7 @@
 
 .code {
   background: rgba(255, 255, 255, 0.08);
-  color: var(--text-color);
+  color: white;
   padding: 0.5rem 1rem;
   border-radius: 6px;
   font-family: 'Courier New', monospace;
@@ -324,7 +324,7 @@
 }
 
 .managementContent h2 {
-  color: var(--primary-color);
+  color: white;
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
@@ -355,12 +355,12 @@
 .actionCard h3 {
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--primary-color);
+  color: white;
   margin-bottom: 0.5rem;
 }
 
 .actionCard p {
-  color: var(--text-muted);
+  color: white;
   font-size: 1rem;
   margin-bottom: 1rem;
 }
@@ -548,7 +548,7 @@
 }
 
 .topPerformers h2 {
-  color: var(--primary-color);
+  color: white;
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 1.2rem;
@@ -589,7 +589,7 @@
 }
 
 .name {
-  color: var(--text-color);
+  color: white;
   font-weight: 600;
   font-size: 1.08rem;
   margin: 0 1rem;
@@ -608,7 +608,7 @@
 }
 
 .groupsOverview h2 {
-  color: var(--primary-color);
+  color: white;
   font-size: 1.3rem;
   font-weight: 700;
   margin-bottom: 1.2rem;
@@ -638,7 +638,7 @@
 
 .groupsTable th {
   background: rgba(0,123,255,0.15);
-  color: var(--text-color);
+  color: white;
   font-weight: 600;
 }
 

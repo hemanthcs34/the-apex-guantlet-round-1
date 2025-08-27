@@ -177,18 +177,8 @@ export default function Question({ userInfo, socket, currentGroup }) {
     switch (category) {
       case 'Sudoku':
         return "Enter your answer as comma-separated values. Example: 1,2,3,4 (row by row)";
-      case 'Sequence Recall':
-        return "Enter only the final answer, not the sequence itself";
-      case 'Maths Problem':
-        return "Enter a short, clear answer. Avoid long explanations";
-      case 'Reasoning Puzzle':
-        return "Enter only the name of the person";
-      case 'Tech Riddle':
-        return "Enter the answer in one word";
-      case 'Bonus':
-        return "Enter only the final result";
       default:
-        return "Enter your answer in one word or short phrase";
+        return "If answer is number enter number only , otherwise enter text";
     }
   };
 
@@ -331,11 +321,13 @@ export default function Question({ userInfo, socket, currentGroup }) {
           <p>{currentQuestion.question}</p>
         )}
         
-        <div className={styles.answerHint}>
-          <p className={styles.hintText}>
-            💡 <strong>Answer Format:</strong> {getAnswerHint(currentQuestion.category)}
-          </p>
-        </div>
+        {currentQuestion.category === 'Sudoku' && (
+          <div className={styles.answerHint}>
+            <p className={styles.hintText}>
+              💡 <strong>Answer Format:</strong> {getAnswerHint(currentQuestion.category)}
+            </p>
+          </div>
+        )}
       </div>
 
       {!isProctor && (

@@ -116,7 +116,7 @@
 .table th {
   text-align: left;
   padding: 0 1rem 0.5rem;
-  color: var(--text-muted);
+  color: #f1f5f9;
   font-weight: 500;
   font-size: 0.9rem;
   text-transform: uppercase;
@@ -158,13 +158,13 @@
 .rank {
   text-align: center;
   font-weight: 700;
-  color: var(--text-muted);
+  color: white;
   width: 15%;
 }
 
 .name {
   font-weight: 500;
-  color: var(--text-color);
+  color: white;
 }
 
 .table tr:hover .name {
