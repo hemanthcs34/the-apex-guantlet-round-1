@@ -39,9 +39,14 @@ export default function Home() {
   return (
     <motion.div
       className={styles.card}
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.7, type: "spring", stiffness: 80 }}
+      whileHover={{
+        scale: 1.03,
+        boxShadow: "0 0 32px #00f2fe55",
+        transition: { duration: 0.2, ease: "easeOut" }
+      }}
     >
       <h1 className={styles.title}>⚡ The Apex Gauntlet</h1>
       <p className={styles.subtitle}>IEEE Game Round 1 - Mind Mashup Challenge</p>

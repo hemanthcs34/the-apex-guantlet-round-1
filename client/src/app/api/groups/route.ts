@@ -56,14 +56,21 @@ console.log("participants  are :",participant);
         const sessionId = nanoid();
         participant = await new Participant({ name, isProctor, sessionId, totalScore: 0, groupId: group._id }).save();
 
-        group.participants.push(participant._id);
-        await group.save();
+        // Atomically push participant to group
+        const updatedGroup = await Group.findByIdAndUpdate(
+            group._id,
+            { $push: { participants: participant._id } },
+            { new: true }
+        );
+        if (!updatedGroup) {
+            return NextResponse.json({ message: "Group not found after participant creation." }, { status: 404 });
+        }
 
         return NextResponse.json({
             participantId: participant._id,
             name: participant.name,
             isProctor,
-            group: { id: group._id, name: group.name, questionSetIndex: group.questionSetIndex, code: group.code }
+            group: { id: updatedGroup._id, name: updatedGroup.name, questionSetIndex: updatedGroup.questionSetIndex, code: updatedGroup.code }
         });
 
     } catch (error) {

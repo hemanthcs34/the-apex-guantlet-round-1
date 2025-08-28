@@ -125,6 +125,7 @@ export async function POST(req: Request) {
     } else if (action === 'resetScores') {
       // Reset all scores (for new tournament round)
       await Participant.updateMany({}, { totalScore: 0 });
+      await Participant.deleteMany({});
       await Answer.deleteMany({});
       await Group.updateMany({}, { roundStarted: false, currentQuestionIndex: 0 });
     }
